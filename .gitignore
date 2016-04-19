@@ -1,0 +1,12 @@
+#see also ~/.gitignore_global
+# Directories
+output/
+
+# Files
+*.exo
+*.vtk
+*.komodoproject
+*.komodotools
+*.pvsm
+*.zip
+*.bak
