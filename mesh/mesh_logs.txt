@@ -1,0 +1,14 @@
+#2 km spacing
+# ------
+Executive Exodus summary:
+  Number of dimensions     = 3
+  Number of element blocks = 2
+  Number of sidesets       = 1
+  Number of nodesets       = 7
+  Number of bc sets        = 1
+  Number of elements       = 500000
+  Number of nodes          = 520251
+
+# 1km
+# ------
+

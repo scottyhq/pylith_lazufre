@@ -1,0 +1,52 @@
+// -*- C++ -*- (tell Emacs to use C++ mode for syntax highlighting)
+//
+// This spatial database specifies the distribution of slip on the
+// fault surface. In this case 1 mete of uniform opening
+// in middle of domain (-10<X<10, -10<Y<10). 
+// NOTE: could taper opening to zero at edges, here opening is step function.
+// NOTE: Positive values are associated with left-lateral, reverse, and fault opening
+//
+#SPATIAL.ascii 1
+SimpleDB {
+  num-values = 3
+  value-names =  left-lateral-slip  reverse-slip  fault-opening
+  value-units =  m  m  m
+  num-locs = 8
+  data-dim = 2 // Locations of data points form a plane
+  space-dim = 3
+  cs-data = cartesian {
+    to-meters = 1.0e+3 // Specify coordinates in km for convenience.
+    space-dim = 3
+  } // cs-data
+} // SimpleDB
+// Columns are
+// (1) x coordinate (km)
+// (2) y coordinate (km)
+// (3) z coordinate (km)
+// (4) left-lateral-slip (m) (right-lateral is negative)
+// (5) reverse-slip (m)
+// (6) fault-opening (m)
+// N extent
+-10.1   +10.1 -10.0    0.0  0.0   0.0
+0.0   +10.1 -10.0    0.0  0.0   0.0
++10.1   +10.1 -10.0    0.0  0.0   0.0
+
+// S Extent
+-10.1   +10.0 -10.0    0.0  0.0   0.0
+-10.1   +10.0 -10.0    0.0  0.0   0.0
+-10.1   +10.0 -10.0    0.0  0.0   0.0
+
+// W Extent
+-10.0   -10.0 -10.0    0.0  0.0   1.0
++10.0   +10.0 -10.0    0.0  0.0   1.0
++10.1   +10.0 -10.0    0.0  0.0   0.0
+
+// E extent
+-10.1  +10.1 -10.0    0.0  0.0   0.0
+-10.0  +10.0 -10.0    0.0  0.0   1.0
++10.0  -10.0 -10.0    0.0  0.0   1.0
++10.1  -10.1 -10.0    0.0  0.0   0.0
+
+//Opening
+-10.0  -10.0  -10.0    0.0  0.0   1.0
+0.0  +10.0  -10.1    0.0  0.0   0.0

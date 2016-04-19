@@ -1,0 +1,7 @@
+To extract ascii file with surface node coordinates:
+
+./extract_points.py [name].exo [surface]
+
+For the surface name, check mesh.jou:
+
+./extract_points.py mesh_hex8_3km.jou 16 1

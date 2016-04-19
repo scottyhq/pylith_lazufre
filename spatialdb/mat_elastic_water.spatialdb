@@ -1,0 +1,39 @@
+// -*- C++ -*- (tell Emacs to use C++ mode for syntax highlighting)
+//
+// End-member test for extremely weak incompressible material (water at room temp)
+//
+// NOTE: Vs is made up. As Vs-->0, nu-->0.5
+// NOTE: Pylith crashes for close to incompressible state:
+// -- Solving equations.
+//  0 KSP Residual norm 2.211861647919e+151 
+//  1 KSP Residual norm            nan 
+//Linear solve did not converge due to DIVERGED_NANORINF iterations 1
+//[0]PETSC ERROR: --------------------- Error Message --------------------------------------------------------------
+//[0]PETSC ERROR:   
+//[0]PETSC ERROR: KSPSolve has not converged
+//
+#SPATIAL.ascii 1
+SimpleDB {
+  num-values = 3 // number of material property values
+  value-names =  density vs vp // names of the material property values
+  value-units =  kg/m**3  m/s  m/s // units
+  num-locs = 1 // number of locations
+  data-dim = 0
+  space-dim = 3
+  cs-data = cartesian {
+    to-meters = 1.0
+    space-dim = 3
+  }
+}
+// Columns are
+// (1) x coordinate (m)
+// (2) y coordinate (m)
+// (3) z coordinate (m)
+// (4) density (kg/m^3)
+// (5) vs (m/s)
+// (6) vp (m/s)
+// Corresponds to:
+//{'E': 30e4,
+// 'G': 10e4
+// nu=0.499
+0.0 0.0 0.0 1000.0 10.0 1482.0

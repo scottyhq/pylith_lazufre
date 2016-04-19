@@ -1,0 +1,41 @@
+// -*- C++ -*- (tell Emacs to use C++ mode for syntax highlighting)
+//
+// Tries to approximate okada solution for 'point sill' (length, width, thickness much less than depth)
+// NOTE: that Okada solution is for a dislocation 'patch' of uniform opening, but FEM requires
+// Displacement specified at nodes, tapering to zero at adjacent node
+#SPATIAL.ascii 1
+SimpleDB {
+  num-values = 3
+  value-names =  left-lateral-slip  reverse-slip  fault-opening
+  value-units =  m  m  m
+  num-locs = 5
+  data-dim = 2 // Locations of data points form a plane
+  space-dim = 3
+  cs-data = cartesian {
+    to-meters = 1.0e+3 // Specify coordinates in km for convenience.
+    space-dim = 3
+  } // cs-data
+} // SimpleDB
+// Columns are
+// (1) x coordinate (km)
+// (2) y coordinate (km)
+// (3) z coordinate (km)
+// (4) left-lateral-slip (m) (right-lateral is negative)
+// (5) reverse-slip (m)
+// (6) fault-opening (m)
+
+// Edges
+-1.0 0.0 -10.0 0.0 0.0 0.0
++1.0 0.0 -10.0 0.0 0.0 0.0
+0.0 -1.0 -10.0 0.0 0.0 0.0
+0.0 +1.0 -10.0 0.0 0.0 0.0
+
+// Diagonals
+// NOTE: seems un-needed. paraview does weird interpolation causing slip to look irregular...
+//-1.0 +1.0 -10.0 0.0 0.0 0.0
+//+1.0 +1.0 -10.0 0.0 0.0 0.0
+//-1.0 -1.0 -10.0 0.0 0.0 0.0
+//+1.0 -1.0 -10.0 0.0 0.0 0.0
+
+// Point Sill (Single central node, tapers to zero at adjacent 8 nodes)
+0.0 0.0 -10.0   0.0  0.0   1.0

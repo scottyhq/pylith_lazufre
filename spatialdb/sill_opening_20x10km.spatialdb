@@ -1,0 +1,65 @@
+// -*- C++ -*- (tell Emacs to use C++ mode for syntax highlighting)
+//
+// This spatial database specifies the distribution of slip on the
+// fault surface. In this case 1 mete of uniform opening
+// in middle of domain (-5<X<5, -10<Y<10). Opening tapers to zero
+// at adjacent node NOTE that full size of sill is 20x10km
+#SPATIAL.ascii 1
+SimpleDB {
+  num-values = 3
+  value-names =  left-lateral-slip  reverse-slip  fault-opening
+  value-units =  m  m  m
+  num-locs = 29
+  data-dim = 2 // Locations of data points form a plane
+  space-dim = 3
+  cs-data = cartesian {
+    to-meters = 1.0e+3 // Specify coordinates in km for convenience.
+    space-dim = 3
+  } // cs-data
+} // SimpleDB
+// Columns are
+// (1) x coordinate (km)
+// (2) y coordinate (km)
+// (3) z coordinate (km)
+// (4) left-lateral-slip (m) (right-lateral is negative)
+// (5) reverse-slip (m)
+// (6) fault-opening (m)
+// N extent
+-10.1   +10.1 -10.0    0.0  0.0   0.0
+-5.00   +10.1 -10.0    0.0  0.0   0.0
+0.000   +10.1 -10.0    0.0  0.0   0.0
++5.00   +10.1 -10.0    0.0  0.0   0.0
++10.1   +10.1 -10.0    0.0  0.0   0.0
+
+// S Extent
+-10.1   -10.1 -10.0    0.0  0.0   0.0
+-5.00   -10.1 -10.0    0.0  0.0   0.0
+0.000   -10.1 -10.0    0.0  0.0   0.0
++5.00   -10.1 -10.0    0.0  0.0   0.0
++10.1   -10.1 -10.0    0.0  0.0   0.0
+
+// W Extent
+-5.1   -5.1 -10.0    0.0  0.0   0.0
+-5.1   -5.00 -10.0    0.0  0.0   0.0
+-5.1   0.000 -10.0    0.0  0.0   0.0
+-5.1   +5.00 -10.0    0.0  0.0   0.0
+-5.1   +5.1 -10.0    0.0  0.0   0.0
+
+// E extent
++5.1   -5.1 -10.0    0.0  0.0   0.0
++5.1   -5.00 -10.0    0.0  0.0   0.0
++5.1   0.000 -10.0    0.0  0.0   0.0
++5.1   +5.00 -10.0    0.0  0.0   0.0
++5.1   +5.1 -10.0    0.0  0.0   0.0
+
+//Opening
+-5.0  -5.0  -10.0    0.0  0.0   0.1
+-5.0  +5.0  -10.0    0.0  0.0   0.1
++5.0  +5.0  -10.0    0.0  0.0   0.1
++5.0  -5.0  -10.0    0.0  0.0   0.1
+0.000  0.000  -10.0    0.0  0.0   0.1
+
++5.0  0.000  -10.0    0.0  0.0   0.1
+-5.0  0.000  -10.0    0.0  0.0   0.1
+0.000  +5.0  -10.0    0.0  0.0   0.1
+0.000  -5.0  -10.0    0.0  0.0   0.1

@@ -1,0 +1,39 @@
+# ----------------------------------------------------------------------
+# Create block
+# ----------------------------------------------------------------------
+
+# Block is 200 km x 200 km x 100 km
+# -100 km <= x <= 100 km
+# -100 km <= y <= 100 km
+# -100 km <= z <= 100 km
+reset
+brick x 200000 y 200000 z 100000
+
+# Translate block so the top is at z=0
+volume 1 move x 0 y 0 z -50000
+
+# ----------------------------------------------------------------------
+# Create interface surfaces (sill at 10km depth)
+# ----------------------------------------------------------------------
+create planar surface with plane zplane offset -50000
+surface 7 name "material_interface"
+create planar surface with plane zplane offset -10000
+# NOTE: horizontal dislocation equivalent to sill opening
+surface 8 name "fault_surface"
+
+# ----------------------------------------------------------------------
+# Divide volumes using interface surfaces
+# ----------------------------------------------------------------------
+webcut volume 1 with plane surface fault_surface
+webcut volume 4 with plane surface material_interface
+#webcut volume 4 with plane surface material_interface
+volume 1 name "upper_crust"
+volume 4 name "mid_crust"
+volume 5 name "lower_crust"
+
+# ----------------------------------------------------------------------
+# Imprint all volumes, merging surfaces
+# ----------------------------------------------------------------------
+imprint all with volume all
+merge all
+delete body 2 3
